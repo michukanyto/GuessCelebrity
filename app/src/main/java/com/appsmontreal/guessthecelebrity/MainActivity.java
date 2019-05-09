@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_REQUEST_CODE = 777;
     List<AuthUI.IdpConfig> providers;
     Button signOutButton;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         showSignInOptions();
+        intent = new Intent(this,GameActivity.class);
 
 
     }
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 //Write email in toast
                 Toast.makeText(this,""+user.getEmail(),Toast.LENGTH_LONG).show();
                 signOutButton.setEnabled(true);
+                startActivity(intent);
             }else{
                 Toast.makeText(this,""+response.getError().getMessage(),Toast.LENGTH_LONG).show();
             }
