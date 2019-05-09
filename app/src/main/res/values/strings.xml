@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Guess The Celebrity</string>
+    <string name="facebook_application_id" translatable="false">356970884927114</string>
+    <string name="facebook_protocol_scheme" translatable="false">fb356970884927114</string>
 </resources>

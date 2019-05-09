@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "545915663454",
+    "firebase_url": "https://guess-celebrerity.firebaseio.com",
+    "project_id": "guess-celebrerity",
+    "storage_bucket": "guess-celebrerity.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545915663454:android:77d9d1985fc79f13",
+        "android_client_info": {
+          "package_name": "com.appsmontreal.guessthecelebrity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545915663454-ppeg3791fm91svggcunn14g4rbafgddf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appsmontreal.guessthecelebrity",
+            "certificate_hash": "624bc96b5d80920828ccb5aa2502ff66cb106ae6"
+          }
+        },
+        {
+          "client_id": "545915663454-f2hmem5tqn3d3k0ssnqepok0c8s0csb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF4egwDK-sgUuKjQpoVQSh_XDtClqCS0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545915663454-f2hmem5tqn3d3k0ssnqepok0c8s0csb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
