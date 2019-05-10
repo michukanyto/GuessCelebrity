@@ -12,14 +12,21 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
+import Model.ImageContent;
 import Model.WebContent;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String WEBSOURCE = "http://www.posh24.se/kandisar";
+    WebContent webContent;
+    ImageContent image;
+    ArrayList<String> celebrities;
     FirebaseUser user;
     TextView userTextView;
     TextView scoreTextView;
     int score;
+    String result;
     Button buttons[] = new Button[6];
     int buttonWidgets[] = {R.id.nameButton1,R.id.nameButton2,R.id.nameButton3,R.id.nameButton4,R.id.restartButton,R.id.exitButton};
 
@@ -32,6 +39,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initialize() {
         downloadWebContent();
+        image = new ImageContent();
+        celebrities = new ArrayList<>();
         user = FirebaseAuth.getInstance().getCurrentUser();
         userTextView = findViewById(R.id.userTextView);
         userTextView.setText(user.getDisplayName());
@@ -51,8 +60,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void downloadWebContent(){
-        WebContent webContent = new WebContent();
-        String result = null;
+        webContent = new WebContent();
         try {
             result = webContent.execute(WEBSOURCE).get();
         } catch (Exception e) {
