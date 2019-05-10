@@ -1,7 +1,9 @@
 package com.appsmontreal.guessthecelebrity;
 
+import android.app.Notification;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,7 +12,10 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import Model.WebContent;
+
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String WEBSOURCE = "http://www.posh24.se/kandisar";
     FirebaseUser user;
     TextView userTextView;
     TextView scoreTextView;
@@ -26,6 +31,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initialize() {
+        downloadWebContent();
         user = FirebaseAuth.getInstance().getCurrentUser();
         userTextView = findViewById(R.id.userTextView);
         userTextView.setText(user.getDisplayName());
@@ -41,6 +47,18 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void resetScore(){
         score = 0;
         scoreTextView = findViewById(R.id.scoreTextView);
+    }
+
+
+    public void downloadWebContent(){
+        WebContent webContent = new WebContent();
+        String result = null;
+        try {
+            result = webContent.execute(WEBSOURCE).get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.i("Result",result);
     }
 
 

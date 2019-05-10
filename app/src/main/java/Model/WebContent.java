@@ -10,7 +10,7 @@ import java.net.URL;
 public class WebContent extends AsyncTask<String, Void, String> {
 
     protected String result;
-    
+
     public String getResult() {
         return result;
     }
