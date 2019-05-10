@@ -1,6 +1,6 @@
 package com.appsmontreal.guessthecelebrity;
 
-import android.app.Notification;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,20 +8,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import Model.ImageContent;
 import Model.WebContent;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String WEBSOURCE = "http://www.posh24.se/kandisar";
+    public String imageSource;
     WebContent webContent;
-    ImageContent image;
-    ArrayList<String> celebrities;
+    ImageContent imageContent;
+    Bitmap myImage;
+    ArrayList<String> celebritiesNames;
+    ArrayList<Bitmap> celebritiesPhotos;
     FirebaseUser user;
     TextView userTextView;
     TextView scoreTextView;
@@ -38,9 +42,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initialize() {
+        celebritiesNames = new ArrayList<>();
         downloadWebContent();
-        image = new ImageContent();
-        celebrities = new ArrayList<>();
+        getImages();
         user = FirebaseAuth.getInstance().getCurrentUser();
         userTextView = findViewById(R.id.userTextView);
         userTextView.setText(user.getDisplayName());
@@ -53,11 +57,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void resetScore(){
-        score = 0;
-        scoreTextView = findViewById(R.id.scoreTextView);
-    }
-
 
     public void downloadWebContent(){
         webContent = new WebContent();
@@ -68,6 +67,30 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         Log.i("Result",result);
     }
+
+
+    private void getImages() {
+        imageContent = new ImageContent();
+        Pattern p = Pattern.compile("S(.*?)E");//////////////////////////////
+        Matcher m = p.matcher(result);
+        try {
+            while (m.find()) {
+                imageSource = m.group(1);
+                myImage = imageContent.execute(imageSource).get();
+                celebritiesPhotos.add(myImage);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+    }
+
+
+    public void resetScore(){
+        score = 0;
+        scoreTextView = findViewById(R.id.scoreTextView);
+    }
+
 
 
     @Override
