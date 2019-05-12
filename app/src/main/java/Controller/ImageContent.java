@@ -1,4 +1,4 @@
-package Model;
+package Controller;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

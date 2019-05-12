@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import Model.ImageContent;
-import Model.WebContent;
+import Controller.ImageContent;
+import Controller.WebContent;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String WEBSOURCE = "http://www.posh24.se/kandisar";
@@ -65,19 +65,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.i("Result",result);
+        Log.i("Result================>",result);
     }
 
 
     private void getImages() {
+        Log.i("url ================>","we're here");
         imageContent = new ImageContent();
-        Pattern p = Pattern.compile("S(.*?)E");//////////////////////////////
+        Pattern p = Pattern.compile("<img src=\"(.*?)\"");//////////////////////////////
         Matcher m = p.matcher(result);
         try {
             while (m.find()) {
-                imageSource = m.group(1);
-                myImage = imageContent.execute(imageSource).get();
-                celebritiesPhotos.add(myImage);
+                Log.i("url ================>",m.group(1));
+                imageSource = m.group(1);//get image rul
+                myImage = imageContent.execute(imageSource).get();//send image Url
+                celebritiesPhotos.add(myImage);//add new image to array
             }
         }catch (Exception e){
             e.printStackTrace();

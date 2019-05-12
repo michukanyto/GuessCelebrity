@@ -1,4 +1,4 @@
-package Model;
+package Controller;
 
 import android.os.AsyncTask;
 
@@ -49,3 +49,4 @@ public class WebContent extends AsyncTask<String, Void, String> {
         }
     }
 }
+
