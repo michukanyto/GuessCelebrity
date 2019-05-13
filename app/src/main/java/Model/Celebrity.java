@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Celebrity {
     protected String name;
     protected String photo;
-    public ArrayList<Celebrity> celebrities;
+    protected ArrayList<Celebrity> celebrities = new ArrayList<>();
 
     public Celebrity(String name, String photo) {
         this.name = name;
