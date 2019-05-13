@@ -25,28 +25,24 @@
             android:id="@+id/nameButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="..."
             android:textStyle="italic" />
 
         <Button
             android:id="@+id/nameButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="..."
             android:textStyle="italic" />
 
         <Button
             android:id="@+id/nameButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="..."
             android:textStyle="italic" />
 
         <Button
             android:id="@+id/nameButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="..."
             android:textStyle="italic" />
     </LinearLayout>
 

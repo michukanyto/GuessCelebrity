@@ -40,61 +40,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     int buttonWidgets[] = {R.id.nameButton1,R.id.nameButton2,R.id.nameButton3,R.id.nameButton4,R.id.restartButton,R.id.exitButton};
 
 
-
-//    public class DownloadTask extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... urls) {
-//
-//            String result = "";
-//            URL url;
-//            HttpURLConnection urlConnection = null;
-//
-//            try {
-//                url = new URL(urls[0]);
-//                urlConnection = (HttpURLConnection) url.openConnection();
-//                InputStream in = urlConnection.getInputStream();
-//                InputStreamReader reader = new InputStreamReader(in);
-//                int data = reader.read();
-//
-//                while (data != -1) {
-//                    char current = (char) data;
-//
-//                    result += current;
-//
-//                    data = reader.read();
-//                }
-//
-//                return result;
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//
-//                return "Failed";
-//            }
-//        }
-//    }
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         initialize();
-
-//        DownloadTask task = new DownloadTask();
-//        String result = null;
-//        try {
-//            result = task.execute("http://www.posh24.se/kandisar").get();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        Log.i("Result",result);
     }
 
     private void initialize() {
@@ -124,18 +74,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
         Log.i("Result================>",result);
 
-
-
-
-//        DownloadTask task = new DownloadTask();
-//        String result = null;
-//        try {
-//            result = task.execute("http://www.posh24.se/kandisar").get();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        Log.i("Result",result);
     }
 
 
@@ -158,8 +96,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             while (m.find()) {
                 Log.i("name ================>",m.group(1));
                 imageSource = m.group(1);//get image rul
-//                myImage = imageContent.execute(imageSource).get();//send image Url
-//                celebritiesPhotos.add(myImage);//add new image to array
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -184,8 +120,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.restartButton:
                 resetScore();
-
         }
-
     }
 }
