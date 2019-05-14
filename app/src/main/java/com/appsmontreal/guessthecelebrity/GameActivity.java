@@ -30,7 +30,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     ImageContent imageContent;
     Bitmap myImage;
     ArrayList<String> celebritiesNames;
-    ArrayList<Bitmap> celebritiesPhotos;
+    ArrayList<String> celebritiesPhotos;
     FirebaseUser user;
     TextView userTextView;
     TextView scoreTextView;
@@ -38,6 +38,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     String result;
     Button buttons[] = new Button[6];
     int buttonWidgets[] = {R.id.nameButton1,R.id.nameButton2,R.id.nameButton3,R.id.nameButton4,R.id.restartButton,R.id.exitButton};
+    String[] splitResult;
+
 
 
     @Override
@@ -48,7 +50,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initialize() {
-        celebritiesNames = new ArrayList<>();
+        celebritiesNames = new ArrayList<String>();
+        celebritiesPhotos = new ArrayList<String>();
         downloadWebContent();
         getImages();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -68,11 +71,38 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         webContent = new WebContent();
         result = null;
         try {
-            result = webContent.execute("http://www.posh24.se/kandisar").get();
+            result = webContent.execute(WEBSOURCE).get();
+            splitResult = result.split("<div clss=\"listedArticles\">");
         } catch (Exception e) {
             e.printStackTrace();
         }
         Log.i("Result================>",result);
+
+        Pattern p = Pattern.compile("<img src=\"(.*?)\"");//////////////////////////////
+        Matcher m = p.matcher(splitResult[0]);
+        try {
+            while (m.find()) {
+                celebritiesPhotos.add(m.group(1));
+                imageSource = m.group(1);//get image rul
+//                myImage = imageContent.execute(imageSource).get();//send image Url
+//                celebritiesPhotos.add(myImage);//add new image to array
+            }
+
+            Log.i("url ================>",celebritiesPhotos.toString());
+            Log.i("================>","finish");
+            p = Pattern.compile("alt=\"(.*?)\"");//////////////////////////////
+
+            m = p.matcher(splitResult[0]);
+            while (m.find()) {
+                celebritiesNames.add(m.group(1));
+//                Log.i("name ================>",m.group(1));
+                imageSource = m.group(1);//get image rul
+            }
+            Log.i("Names ================>",celebritiesNames.toString());
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
 
     }
 
@@ -80,27 +110,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private void getImages() {
         Log.i("url ================>","we're here");
         imageContent = new ImageContent();
-        Pattern p = Pattern.compile("<img src=\"(.*?)\"");//////////////////////////////
-        Matcher m = p.matcher(result);
-        try {
-            while (m.find()) {
-                Log.i("url ================>",m.group(1));
-                imageSource = m.group(1);//get image rul
-//                myImage = imageContent.execute(imageSource).get();//send image Url
-//                celebritiesPhotos.add(myImage);//add new image to array
-            }
-            Log.i("================>","finish");
-            p = Pattern.compile("alt=\"(.*?)\"");//////////////////////////////
 
-            m = p.matcher(result);
-            while (m.find()) {
-                Log.i("name ================>",m.group(1));
-                imageSource = m.group(1);//get image rul
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }
     }
 
 
