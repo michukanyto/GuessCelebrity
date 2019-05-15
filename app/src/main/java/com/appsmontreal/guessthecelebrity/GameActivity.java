@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +40,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     Button buttons[] = new Button[6];
     int buttonWidgets[] = {R.id.nameButton1,R.id.nameButton2,R.id.nameButton3,R.id.nameButton4,R.id.restartButton,R.id.exitButton};
     String[] splitResult;
+    Random random;
 
 
 
@@ -53,11 +55,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         celebritiesNames = new ArrayList<String>();
         celebritiesPhotos = new ArrayList<String>();
         downloadWebContent();
-        getImages();
+//        getImages();
         user = FirebaseAuth.getInstance().getCurrentUser();
         userTextView = findViewById(R.id.userTextView);
         userTextView.setText(user.getDisplayName());
         scoreTextView = findViewById(R.id.scoreTextView);
+
         resetScore();
 
         for (int b = 0; b < buttons.length; b++){
@@ -99,6 +102,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 imageSource = m.group(1);//get image rul
             }
             Log.i("Names ================>",celebritiesNames.toString());
+            int tmp = celebritiesNames.size();
+            Log.i("size ================>",String.valueOf(tmp));
         }catch (Exception e){
             e.printStackTrace();
 
