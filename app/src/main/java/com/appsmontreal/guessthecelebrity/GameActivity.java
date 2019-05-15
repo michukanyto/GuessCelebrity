@@ -2,6 +2,7 @@ package com.appsmontreal.guessthecelebrity;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +29,7 @@ import Controller.WebContent;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String WEBSOURCE = "http://www.posh24.se/kandisar";
+    private static final String ANSWERMSG = "!!! YOU GET A POINT !!!";
     public String imageSource;
     WebContent webContent;
     ImageContent imageContent;
@@ -185,11 +188,13 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void checkAnswer(int index) {
+
         if (buttons[index].getText().equals(celebritiesNames.get(celebrityIndex))){
+            View v = findViewById(android.R.id.content);
             score++;
             Log.i("score ===> ", String.valueOf(score));
             scoreTextView.setText(String.valueOf(score));
-
+            Snackbar.make(v,ANSWERMSG,Snackbar.LENGTH_SHORT).show();
         }
     }
 }
