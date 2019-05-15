@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +36,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     FirebaseUser user;
     TextView userTextView;
     TextView scoreTextView;
+    ImageView celebrityImageView;
     int score;
     String result;
     Button buttons[] = new Button[6];
@@ -55,18 +57,19 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         celebritiesNames = new ArrayList<String>();
         celebritiesPhotos = new ArrayList<String>();
         downloadWebContent();
-//        getImages();
         user = FirebaseAuth.getInstance().getCurrentUser();
         userTextView = findViewById(R.id.userTextView);
         userTextView.setText(user.getDisplayName());
+        celebrityImageView = findViewById(R.id.celebrityImageView);
         scoreTextView = findViewById(R.id.scoreTextView);
-
+        random  = new Random();
         resetScore();
 
         for (int b = 0; b < buttons.length; b++){
             buttons[b] = findViewById(buttonWidgets[b]);
             buttons[b].setOnClickListener(this);
         }
+        nextQuestion();
     }
 
 
@@ -83,6 +86,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         Pattern p = Pattern.compile("<img src=\"(.*?)\"");//////////////////////////////
         Matcher m = p.matcher(splitResult[0]);
+//        Matcher m = p.matcher(result);
         try {
             while (m.find()) {
                 celebritiesPhotos.add(m.group(1));
@@ -93,9 +97,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
             Log.i("url ================>",celebritiesPhotos.toString());
             Log.i("================>","finish");
-            p = Pattern.compile("alt=\"(.*?)\"");//////////////////////////////
+            p = Pattern.compile("\" alt=\"(.*?)\"/>");//////////////////////////////
 
             m = p.matcher(splitResult[0]);
+//            m = p.matcher(result);
             while (m.find()) {
                 celebritiesNames.add(m.group(1));
 //                Log.i("name ================>",m.group(1));
@@ -111,10 +116,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void nextQuestion(){
+        setImages();
+        celebrityImageView.setImageBitmap(myImage);
+    }
 
-    private void getImages() {
+
+    private void setImages() {
         Log.i("url ================>","we're here");
         imageContent = new ImageContent();
+
+        try {
+            myImage = imageContent.execute(celebritiesPhotos.get(random.nextInt(88))).get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -135,6 +151,22 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.restartButton:
                 resetScore();
+
+            case R.id.nameButton1:
+                nextQuestion();
+                break;
+
+            case R.id.nameButton2:
+                nextQuestion();
+                break;
+
+            case R.id.nameButton3:
+                nextQuestion();
+                break;
+
+            case R.id.nameButton4:
+                nextQuestion();
+                break;
         }
     }
 }
