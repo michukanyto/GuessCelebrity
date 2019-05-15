@@ -43,6 +43,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     int buttonWidgets[] = {R.id.nameButton1,R.id.nameButton2,R.id.nameButton3,R.id.nameButton4,R.id.restartButton,R.id.exitButton};
     String[] splitResult;
     Random random;
+    int celebrityIndex;
+    int buttonIndex;
 
 
 
@@ -113,6 +115,14 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private void nextQuestion(){
         setImages();
         celebrityImageView.setImageBitmap(myImage);
+        buttonIndex = random.nextInt(4);
+        buttons[buttonIndex].setText(celebritiesNames.get(celebrityIndex));//Correct ANSWER
+        for (int b = 0;  b < 4; b++){
+            if (buttonIndex == b){
+                continue;
+            }
+            buttons[b].setText(celebritiesNames.get(celebrityIndex + b));
+        }
     }
 
 
@@ -121,7 +131,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         imageContent = new ImageContent();
 
         try {
-            myImage = imageContent.execute(celebritiesPhotos.get(random.nextInt(88))).get();
+            celebrityIndex = random.nextInt(88);
+            myImage = imageContent.execute(celebritiesPhotos.get(celebrityIndex)).get();
         } catch (Exception e) {
             e.printStackTrace();
         }
