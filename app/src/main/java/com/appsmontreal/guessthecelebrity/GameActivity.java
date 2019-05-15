@@ -79,20 +79,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         try {
             result = webContent.execute(WEBSOURCE).get();
             splitResult = result.split("<div clss=\"listedArticles\">");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         Log.i("Result================>",result);
 
         Pattern p = Pattern.compile("<img src=\"(.*?)\"");//////////////////////////////
         Matcher m = p.matcher(splitResult[0]);
-//        Matcher m = p.matcher(result);
-        try {
+
             while (m.find()) {
                 celebritiesPhotos.add(m.group(1));
                 imageSource = m.group(1);//get image rul
-//                myImage = imageContent.execute(imageSource).get();//send image Url
-//                celebritiesPhotos.add(myImage);//add new image to array
             }
 
             Log.i("url ================>",celebritiesPhotos.toString());
@@ -103,7 +98,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 //            m = p.matcher(result);
             while (m.find()) {
                 celebritiesNames.add(m.group(1));
-//                Log.i("name ================>",m.group(1));
                 imageSource = m.group(1);//get image rul
             }
             Log.i("Names ================>",celebritiesNames.toString());
