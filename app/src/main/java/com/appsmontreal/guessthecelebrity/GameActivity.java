@@ -160,20 +160,36 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 resetScore();
 
             case R.id.nameButton1:
+                checkAnswer(0);
                 nextQuestion();
                 break;
 
             case R.id.nameButton2:
+                checkAnswer(1);
                 nextQuestion();
                 break;
 
             case R.id.nameButton3:
+                checkAnswer(2);
                 nextQuestion();
                 break;
 
             case R.id.nameButton4:
+                checkAnswer(3);
                 nextQuestion();
                 break;
+
+            default:
+                break;
+        }
+    }
+
+    private void checkAnswer(int index) {
+        if (buttons[index].getText().equals(celebritiesNames.get(celebrityIndex))){
+            score++;
+            Log.i("score ===> ", String.valueOf(score));
+            scoreTextView.setText(String.valueOf(score));
+
         }
     }
 }
