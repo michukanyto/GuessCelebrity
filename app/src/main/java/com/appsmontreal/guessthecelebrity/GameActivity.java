@@ -29,7 +29,7 @@ import Controller.WebContent;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String WEBSOURCE = "http://www.posh24.se/kandisar";
-    private static final String ANSWERMSG = "!!! YOU GET A POINT !!!";
+    private static final String ANSWERMSG = "\t!!! YOU GOT A POINT !!!";
     public String imageSource;
     WebContent webContent;
     ImageContent imageContent;
@@ -125,7 +125,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             if (buttonIndex == b){
                 continue;
             }
-            fakeCelebrityIndex = random.nextInt(80);
+            fakeCelebrityIndex = random.nextInt(82);
             buttons[b].setText(celebritiesNames.get(fakeCelebrityIndex));
         }
     }
@@ -136,7 +136,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         imageContent = new ImageContent();
 
         try {
-            celebrityIndex = random.nextInt(80);
+            celebrityIndex = random.nextInt(82);
             myImage = imageContent.execute(celebritiesPhotos.get(celebrityIndex)).get();
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,7 +147,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
     public void resetScore(){
         score = 0;
-        scoreTextView = findViewById(R.id.scoreTextView);
+        scoreTextView.setText(String.valueOf(score));
     }
 
 
