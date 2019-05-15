@@ -45,6 +45,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     Random random;
     int celebrityIndex;
     int buttonIndex;
+    int fakeCelebrityIndex;
 
 
 
@@ -121,7 +122,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             if (buttonIndex == b){
                 continue;
             }
-            buttons[b].setText(celebritiesNames.get(celebrityIndex + b));
+            fakeCelebrityIndex = random.nextInt(80);
+            buttons[b].setText(celebritiesNames.get(fakeCelebrityIndex));
         }
     }
 
@@ -131,7 +133,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         imageContent = new ImageContent();
 
         try {
-            celebrityIndex = random.nextInt(88);
+            celebrityIndex = random.nextInt(80);
             myImage = imageContent.execute(celebritiesPhotos.get(celebrityIndex)).get();
         } catch (Exception e) {
             e.printStackTrace();
